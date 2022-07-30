@@ -15,48 +15,60 @@
     </div>
 
     <div class="block">
-       <data-table :rowsPerPage="10" :list="workers" @dataSlice="data => this.data = data">
-  <template #head>
-        <tr>
-          <th>Darbuotojo Nr.</th>
-          <th>Vardas</th>
-          <th>Veiksmai</th>
-        </tr>
+      <data-table
+        :rowsPerPage="10"
+        :list="workers"
+        @dataSlice="(data) => (this.data = data)"
+      >
+        <template #head>
+          <tr>
+            <th>Darbuotojo Nr.</th>
+            <th>Vardas</th>
+            <th>Veiksmai</th>
+          </tr>
         </template>
 
-  <template #body>
-        <tr v-for="worker in data" v-bind:key="worker.worker_id">
-          <td><router-link
-          :to="{ name: 'workerDetails', params: { id: worker.worker_id } }"
-          class="tag is-light is-info"
-          >{{ worker.worker_id }}</router-link
-        ></td>
-          <td>{{ worker.name }}</td>
-          <td>
-            <div class="field is-grouped">
-              <div class="control">
-                <router-link
-                  :to="{ name: 'workerEdit', params: { id: worker.worker_id } }"
-                  class="button is-light"
-                  >Koreguoti</router-link
-                >
+        <template #body>
+          <tr v-for="worker in data" v-bind:key="worker.worker_id">
+            <td>
+              <router-link
+                :to="{
+                  name: 'workerDetails',
+                  params: { id: worker.worker_id },
+                }"
+                class="tag is-light is-info"
+                >{{ worker.worker_id }}</router-link
+              >
+            </td>
+            <td>{{ worker.name }}</td>
+            <td>
+              <div class="field is-grouped">
+                <div class="control">
+                  <router-link
+                    :to="{
+                      name: 'workerEdit',
+                      params: { id: worker.worker_id },
+                    }"
+                    class="button is-light"
+                    >Koreguoti</router-link
+                  >
+                </div>
+                <div class="control">
+                  <router-link
+                    :to="{
+                      name: 'workerDetails',
+                      params: { id: worker.worker_id },
+                    }"
+                    class="button is-light"
+                    >Darbai</router-link
+                  >
+                </div>
               </div>
-              <div class="control">
-                <router-link
-                  :to="{
-                    name: 'workerDetails',
-                    params: { id: worker.worker_id },
-                  }"
-                  class="button is-light"
-                  >Darbai</router-link
-                >
-              </div>
-            </div>
-          </td>
-        </tr>
+            </td>
+          </tr>
         </template>
-</data-table>
-  <br>
+      </data-table>
+      <br />
     </div>
 
     <table class="table"></table>
@@ -64,10 +76,10 @@
 </template>
 
 <script>
-import { fetchWorkers } from '@/lib/api';
+import { fetchWorkers } from "@/lib/api";
 
 export default {
-  name: 'WorkerList',
+  name: "WorkerList",
   data() {
     return {
       workers: [],
@@ -91,4 +103,3 @@ export default {
   },
 };
 </script>
-

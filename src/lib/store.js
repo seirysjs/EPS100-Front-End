@@ -1,23 +1,23 @@
-import router from '@/router/index';
-import { defineStore } from 'pinia';
-import { loginAuth } from '@/lib/api';
+import router from "@/router/index";
+import { defineStore } from "pinia";
+import { loginAuth } from "@/lib/api";
 
 const getUser = () => JSON.parse(localStorage.getItem("user"));
 
-export const session = defineStore('session', {
-  state: () => ({ 
-    user: getUser(), 
+export const session = defineStore("session", {
+  state: () => ({
+    user: getUser(),
   }),
   actions: {
     login(data) {
       return loginAuth(data).then(
-        response => {
-          this.user = JSON.stringify(response.data.access_token)
+        (response) => {
+          this.user = JSON.stringify(response.data.access_token);
           localStorage.setItem("user", this.user);
           router.push({ name: "home" });
           return Promise.resolve(response);
         },
-        error => {
+        (error) => {
           return Promise.reject(error);
         }
       );
@@ -27,6 +27,5 @@ export const session = defineStore('session', {
       localStorage.removeItem("user");
       this.user = null;
     },
-
   },
 });

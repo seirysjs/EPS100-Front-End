@@ -1,336 +1,336 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from "vue-router";
 
-import BlockEdit from '@/pages/BlockEdit';
-import BlockList from '@/pages/BlockList';
-import BlockProcess from '@/pages/BlockProcess';
-import BlockMultiCut from '@/pages/BlockMultiCut';
-import BlockNew from '@/pages/BlockNew';
-import BlockDetails from '@/pages/BlockDetails';
-import OrderList from '@/pages/OrderList';
-import OrderNew from '@/pages/OrderNew';
-import OrderEdit from '@/pages/OrderEdit';
-import OrderBill from '@/pages/OrderBill';
-import OrderBillEdit from '@/pages/OrderBillEdit'; 
-import OrderBillList from '@/pages/OrderBillList';
-import OrderBillDetails from '@/pages/OrderBillDetails';
-import BillPayment from '@/pages/BillPayment';
-import BillPaymentEdit from '@/pages/BillPaymentEdit';
-import PricesList from '@/pages/PricesList';
-import PriceListNew from '@/pages/PriceListNew';
-import PriceListEdit from '@/pages/PriceListEdit';
-import PriceListDetails from '@/pages/PriceListDetails';
-import OrderInvoice from '@/pages/OrderInvoice';
-import OrderInvoiceEdit from '@/pages/OrderInvoiceEdit';
-import OrderInvoiceList from '@/pages/OrderInvoiceList';
-import OrderFulfill from '@/pages/OrderFulfill';
-import OrderDetails from '@/pages/OrderDetails';
-import ClientList from '@/pages/ClientList';
-import ClientEdit from '@/pages/ClientEdit';
-import ClientDetails from '@/pages/ClientDetails';
-import ClientNew from '@/pages/ClientNew';
-import InventoryClassBlueprintsList from '@/pages/InventoryClassBlueprintsList';
-import InventoryClassList from '@/pages/InventoryClassList';
-import InventoryDetails from '@/pages/InventoryDetails';
-import ProductDetails from '@/pages/ProductDetails';   
-import ProductList from '@/pages/ProductList';
-import ProductClassDetailsList from '@/pages/ProductClassDetailsList';
-import ProductSizeDetailsList from '@/pages/ProductSizeDetailsList';
-import ProductClassList from '@/pages/ProductClassList';
-import ProductSizesList from '@/pages/ProductSizesList';
-import ProductNew from '@/pages/ProductNew';
-import ProductNewClass from '@/pages/ProductNewClass';
-import ProductNewSize from '@/pages/ProductNewSize';
-import WorkerList from '@/pages/WorkerList';
-import WorkerEdit from '@/pages/WorkerEdit';
-import WorkerNew from '@/pages/WorkerNew';
-import WorkerDetails from '@/pages/WorkerDetails';
-import TransportList from '@/pages/TransportList';
-import TransportEdit from '@/pages/TransportEdit';
-import TransportNew from '@/pages/TransportNew';
-import TransportDetails from '@/pages/TransportDetails';
-import Login from '@/pages/Login';
+import BlockEdit from "@/pages/BlockEdit";
+import BlockList from "@/pages/BlockList";
+import BlockProcess from "@/pages/BlockProcess";
+import BlockMultiCut from "@/pages/BlockMultiCut";
+import BlockNew from "@/pages/BlockNew";
+import BlockDetails from "@/pages/BlockDetails";
+import OrderList from "@/pages/OrderList";
+import OrderNew from "@/pages/OrderNew";
+import OrderEdit from "@/pages/OrderEdit";
+import OrderBill from "@/pages/OrderBill";
+import OrderBillEdit from "@/pages/OrderBillEdit";
+import OrderBillList from "@/pages/OrderBillList";
+import OrderBillDetails from "@/pages/OrderBillDetails";
+import BillPayment from "@/pages/BillPayment";
+import BillPaymentEdit from "@/pages/BillPaymentEdit";
+import PricesList from "@/pages/PricesList";
+import PriceListNew from "@/pages/PriceListNew";
+import PriceListEdit from "@/pages/PriceListEdit";
+import PriceListDetails from "@/pages/PriceListDetails";
+import OrderInvoice from "@/pages/OrderInvoice";
+import OrderInvoiceEdit from "@/pages/OrderInvoiceEdit";
+import OrderInvoiceList from "@/pages/OrderInvoiceList";
+import OrderFulfill from "@/pages/OrderFulfill";
+import OrderDetails from "@/pages/OrderDetails";
+import ClientList from "@/pages/ClientList";
+import ClientEdit from "@/pages/ClientEdit";
+import ClientDetails from "@/pages/ClientDetails";
+import ClientNew from "@/pages/ClientNew";
+import InventoryClassBlueprintsList from "@/pages/InventoryClassBlueprintsList";
+import InventoryClassList from "@/pages/InventoryClassList";
+import InventoryDetails from "@/pages/InventoryDetails";
+import ProductDetails from "@/pages/ProductDetails";
+import ProductList from "@/pages/ProductList";
+import ProductClassDetailsList from "@/pages/ProductClassDetailsList";
+import ProductSizeDetailsList from "@/pages/ProductSizeDetailsList";
+import ProductClassList from "@/pages/ProductClassList";
+import ProductSizesList from "@/pages/ProductSizesList";
+import ProductNew from "@/pages/ProductNew";
+import ProductNewClass from "@/pages/ProductNewClass";
+import ProductNewSize from "@/pages/ProductNewSize";
+import WorkerList from "@/pages/WorkerList";
+import WorkerEdit from "@/pages/WorkerEdit";
+import WorkerNew from "@/pages/WorkerNew";
+import WorkerDetails from "@/pages/WorkerDetails";
+import TransportList from "@/pages/TransportList";
+import TransportEdit from "@/pages/TransportEdit";
+import TransportNew from "@/pages/TransportNew";
+import TransportDetails from "@/pages/TransportDetails";
+import Login from "@/pages/Login";
 
 const routes = [
   {
-    path: '/',
+    path: "/",
     component: Login,
-    name: 'login',
+    name: "login",
   },
   {
-    path: '/home',
+    path: "/home",
     component: BlockList,
-    name: 'home',
+    name: "home",
   },
   {
-    path: '/blocks',
+    path: "/blocks",
     component: BlockList,
-    name: 'blockList',
+    name: "blockList",
   },
   {
-    path: '/blocks/new',
+    path: "/blocks/new",
     component: BlockNew,
-    name: 'blockNew',
+    name: "blockNew",
   },
   {
-    path: '/blocks/:id/details',
+    path: "/blocks/:id/details",
     component: BlockDetails,
-    name: 'blockDetails',
+    name: "blockDetails",
     props: true,
   },
   {
-    path: '/blocks/:id/process',
+    path: "/blocks/:id/process",
     component: BlockProcess,
-    name: 'blockProcess',
+    name: "blockProcess",
     props: true,
   },
   {
-    path: '/blocks/multi-cut',
+    path: "/blocks/multi-cut",
     component: BlockMultiCut,
-    name: 'blockMultiCut',
+    name: "blockMultiCut",
   },
   {
-    path: '/blocks/:id/edit',
+    path: "/blocks/:id/edit",
     component: BlockEdit,
-    name: 'blockEdit',
+    name: "blockEdit",
     props: true,
   },
   {
-    path: '/orders',
+    path: "/orders",
     component: OrderList,
-    name: 'orderList',
+    name: "orderList",
   },
   {
-    path: '/orders/new',
+    path: "/orders/new",
     component: OrderNew,
-    name: 'orderNew',
+    name: "orderNew",
   },
   {
-    path: '/orders/:id/edit',
+    path: "/orders/:id/edit",
     component: OrderEdit,
-    name: 'orderEdit',
+    name: "orderEdit",
     props: true,
   },
   {
-    path: '/orders/:id/bill',
+    path: "/orders/:id/bill",
     component: OrderBill,
-    name: 'orderBill',
+    name: "orderBill",
     props: true,
   },
   {
-    path: '/bills/:id/edit',
+    path: "/bills/:id/edit",
     component: OrderBillEdit,
-    name: 'orderBillEdit',
+    name: "orderBillEdit",
     props: true,
   },
   {
-    path: '/bills/:id/details',
+    path: "/bills/:id/details",
     component: OrderBillDetails,
-    name: 'orderBillDetails',
+    name: "orderBillDetails",
     props: true,
   },
   {
-    path: '/bills/:id/payment',
+    path: "/bills/:id/payment",
     component: BillPayment,
-    name: 'billPayment',
+    name: "billPayment",
     props: true,
   },
   {
-    path: '/bills/payment/:id',
+    path: "/bills/payment/:id",
     component: BillPaymentEdit,
-    name: 'billPaymentEdit',
+    name: "billPaymentEdit",
     props: true,
   },
   {
-    path: '/bills',
+    path: "/bills",
     component: OrderBillList,
-    name: 'orderBillList',
+    name: "orderBillList",
   },
   {
-    path: '/price-lists',
+    path: "/price-lists",
     component: PricesList,
-    name: 'pricesList',
+    name: "pricesList",
   },
   {
-    path: '/price-lists/new',
+    path: "/price-lists/new",
     component: PriceListNew,
-    name: 'priceListNew',
+    name: "priceListNew",
   },
   {
-    path: '/price-lists/:id/edit',
+    path: "/price-lists/:id/edit",
     component: PriceListEdit,
-    name: 'priceListEdit',
+    name: "priceListEdit",
     props: true,
   },
   {
-    path: '/price-lists/:id/details',
+    path: "/price-lists/:id/details",
     component: PriceListDetails,
-    name: 'priceListDetails',
+    name: "priceListDetails",
     props: true,
   },
   {
-    path: '/orders/:id/invoice',
+    path: "/orders/:id/invoice",
     component: OrderInvoice,
-    name: 'orderInvoice',
+    name: "orderInvoice",
     props: true,
   },
   {
-    path: '/transfers/:id/edit',
+    path: "/transfers/:id/edit",
     component: OrderInvoiceEdit,
-    name: 'orderInvoiceEdit',
+    name: "orderInvoiceEdit",
     props: true,
   },
   {
-    path: '/transfers',
+    path: "/transfers",
     component: OrderInvoiceList,
-    name: 'orderInvoiceList',
+    name: "orderInvoiceList",
   },
   {
-    path: '/orders/:id/fulfill',
+    path: "/orders/:id/fulfill",
     component: OrderFulfill,
-    name: 'orderFulfill',
+    name: "orderFulfill",
     props: true,
   },
   {
-    path: '/orders/:id/details',
+    path: "/orders/:id/details",
     component: OrderDetails,
-    name: 'orderDetails',
+    name: "orderDetails",
     props: true,
   },
   {
-    path: '/clients',
+    path: "/clients",
     component: ClientList,
-    name: 'clientList',
+    name: "clientList",
   },
   {
-    path: '/clients/new',
+    path: "/clients/new",
     component: ClientNew,
-    name: 'clientNew',
+    name: "clientNew",
   },
   {
-    path: '/clients/:id/details',
+    path: "/clients/:id/details",
     component: ClientDetails,
-    name: 'clientDetails',
+    name: "clientDetails",
     props: true,
   },
   {
-    path: '/clients/:id/edit',
+    path: "/clients/:id/edit",
     component: ClientEdit,
-    name: 'clientEdit',
+    name: "clientEdit",
     props: true,
   },
   {
-    path: '/inventory',
+    path: "/inventory",
     component: InventoryClassList,
-    name: 'inventoryClassList',
+    name: "inventoryClassList",
   },
   {
-    path: '/inventory/:id/blueprints',
+    path: "/inventory/:id/blueprints",
     component: InventoryClassBlueprintsList,
-    name: 'inventoryClassBlueprintsList',
+    name: "inventoryClassBlueprintsList",
     props: true,
   },
   {
-    path: '/inventory/:id/details',
+    path: "/inventory/:id/details",
     component: InventoryDetails,
-    name: 'inventoryDetails',
+    name: "inventoryDetails",
     props: true,
   },
   {
-    path: '/products',
+    path: "/products",
     component: ProductList,
-    name: 'productList',
+    name: "productList",
   },
   {
-    path: '/products/classes',
+    path: "/products/classes",
     component: ProductClassList,
-    name: 'productClassList',
+    name: "productClassList",
   },
   {
-    path: '/products/sizes',
+    path: "/products/sizes",
     component: ProductSizesList,
-    name: 'productSizesList',
+    name: "productSizesList",
   },
   {
-    path: '/products/new',
+    path: "/products/new",
     component: ProductNew,
-    name: 'productNew',
+    name: "productNew",
   },
   {
-    path: '/products/new-class',
+    path: "/products/new-class",
     component: ProductNewClass,
-    name: 'productNewClass',
+    name: "productNewClass",
   },
   {
-    path: '/products/new-size',
+    path: "/products/new-size",
     component: ProductNewSize,
-    name: 'productNewSize',
+    name: "productNewSize",
   },
   {
-    path: '/products/:id/details',
+    path: "/products/:id/details",
     component: ProductDetails,
-    name: 'productDetails',
+    name: "productDetails",
     props: true,
   },
   {
-    path: '/class/:id/details',
+    path: "/class/:id/details",
     component: ProductClassDetailsList,
-    name: 'productClassDetailsList',
+    name: "productClassDetailsList",
     props: true,
   },
   {
-    path: '/size/:id/details',
+    path: "/size/:id/details",
     component: ProductSizeDetailsList,
-    name: 'productSizeDetailsList',
+    name: "productSizeDetailsList",
     props: true,
   },
   {
-    path: '/workers',
+    path: "/workers",
     component: WorkerList,
-    name: 'workerList',
+    name: "workerList",
   },
   {
-    path: '/workers/:id/edit',
+    path: "/workers/:id/edit",
     component: WorkerEdit,
-    name: 'workerEdit',
-    props: true
+    name: "workerEdit",
+    props: true,
   },
   {
-    path: '/workers/new',
+    path: "/workers/new",
     component: WorkerNew,
-    name: 'workerNew',
+    name: "workerNew",
   },
   {
-    path: '/workers/:id/details',
+    path: "/workers/:id/details",
     component: WorkerDetails,
-    name: 'workerDetails',
-    props: true
+    name: "workerDetails",
+    props: true,
   },
   {
-    path: '/transports',
+    path: "/transports",
     component: TransportList,
-    name: 'transportList',
+    name: "transportList",
   },
   {
-    path: '/transports/:id/edit',
+    path: "/transports/:id/edit",
     component: TransportEdit,
-    name: 'transportEdit',
-    props: true
+    name: "transportEdit",
+    props: true,
   },
   {
-    path: '/transports/new',
+    path: "/transports/new",
     component: TransportNew,
-    name: 'transportNew',
+    name: "transportNew",
   },
   {
-    path: '/transports/:id/details',
+    path: "/transports/:id/details",
     component: TransportDetails,
-    name: 'transportDetails',
-    props: true
+    name: "transportDetails",
+    props: true,
   },
 ];
 
 const router = createRouter({
-  linkExactActiveClass: 'is-active',
+  linkExactActiveClass: "is-active",
   history: createWebHashHistory(),
   routes,
 });

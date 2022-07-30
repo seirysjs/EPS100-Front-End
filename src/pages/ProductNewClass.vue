@@ -4,40 +4,63 @@
     <table class="table">
       <div class="field">
         <div class="control">
-          <label class="label" for='product_class'>Markė:</label>
-          <input class="input" :class="errors.name && 'is-danger'" type="text" v-model="form.name">
+          <label class="label" for="product_class">Markė:</label>
+          <input
+            class="input"
+            :class="errors.name && 'is-danger'"
+            type="text"
+            v-model="form.name"
+          />
         </div>
         <div class="control">
-          <label class="label" for='product_class'>Džiovinimo terminas (D):</label>
-          <input class="input" :class="errors.days_to_dry && 'is-danger'" type="number" step="1" min="0" v-model="form.days_to_dry">
+          <label class="label" for="product_class"
+            >Džiovinimo terminas (D):</label
+          >
+          <input
+            class="input"
+            :class="errors.days_to_dry && 'is-danger'"
+            type="number"
+            step="1"
+            min="0"
+            v-model="form.days_to_dry"
+          />
         </div>
       </div>
-  <div class="field is-grouped is-grouped-right">
-      <div class="control"><a href="#" class="button is-light" @click="routerGoBack()">Atšaukti</a></div>
-    <div class="control">
-      <input class="button is-link" @click="postForm()" type='submit' value='Pridėti'/>
-    </div>
-  </div>
-</table>
+      <div class="field is-grouped is-grouped-right">
+        <div class="control">
+          <a href="#" class="button is-light" @click="routerGoBack()"
+            >Atšaukti</a
+          >
+        </div>
+        <div class="control">
+          <input
+            class="button is-link"
+            @click="postForm()"
+            type="submit"
+            value="Pridėti"
+          />
+        </div>
+      </div>
+    </table>
   </div>
 </template>
 
 <script>
-import { createProductClass } from '@/lib/api';
+import { createProductClass } from "@/lib/api";
 
 export default {
-  name: 'ProductNewClass',
+  name: "ProductNewClass",
   data() {
     return {
       form: {
         name: "",
         days_to_dry: 0,
       },
-      errors: {}
+      errors: {},
     };
   },
 
-    created() {
+  created() {
     this.load();
   },
 
@@ -47,18 +70,18 @@ export default {
       if (!errors.length) return;
       const labels = {};
       if (errors.length != 0)
-      errors.forEach(error => labels[error.property] = error.constraints);
+        errors.forEach((error) => (labels[error.property] = error.constraints));
       this.errors = labels;
     },
     postForm() {
       createProductClass(this.form)
-        .then(res => {
+        .then((res) => {
           const content = res;
           this.parseErrors(content.data.errors);
           if (content.data.errors.length == 0)
-          this.$router.push({ name: "productClassList" });
+            this.$router.push({ name: "productClassList" });
         })
-        .catch(err => console.log("ERROR ", err));
+        .catch((err) => console.log("ERROR ", err));
     },
 
     routerGoBack() {
@@ -67,4 +90,3 @@ export default {
   },
 };
 </script>
-

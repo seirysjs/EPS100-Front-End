@@ -1,14 +1,13 @@
 <template>
   <div class="container">
-
-<div>
-    <VueTailwindPagination
-      :current="currentPage"
-      :total="total"
-      :per-page="perPage"
-      @page-changed="onPageClick($event)"
-    />
-</div>
+    <div>
+      <VueTailwindPagination
+        :current="currentPage"
+        :total="total"
+        :per-page="perPage"
+        @page-changed="onPageClick($event)"
+      />
+    </div>
     <table class="table is-fullwidth">
       <thead>
         <slot name="head" :list="list"></slot>
@@ -19,15 +18,15 @@
     </table>
 
     <VueTailwindPagination
-      style="margin-top: -15px;"
+      style="margin-top: -15px"
       :current="currentPage"
       :total="total"
       :per-page="perPage"
       v-if="data.length == perPage"
       @page-changed="onPageClick($event)"
     />
-<br>
-<br>
+    <br />
+    <br />
   </div>
 </template>
 
@@ -39,23 +38,23 @@ export default {
   components: {
     VueTailwindPagination,
   },
-  name: 'DataTable',
-  props: ['list', 'rowsPerPage'],
+  name: "DataTable",
+  props: ["list", "rowsPerPage"],
   computed: {
     propChange() {
       return this.list;
-    }
+    },
   },
   watch: {
-    list: function() {
+    list: function () {
       this.updateList();
     },
-    rowsPerPage: function() {
+    rowsPerPage: function () {
       this.perPage = this.rowsPerPage;
       this.updateList();
     },
   },
-  emits: ['dataSlice'],
+  emits: ["dataSlice"],
 
   data() {
     return {
@@ -75,19 +74,25 @@ export default {
       if (!this.perPage) this.perPage = 10;
       if (!this.total) this.total = 0;
       if (!this.data) this.data = [];
-      this.data = this.list.slice(0, this.perPage)
-      this.$emit('dataSlice', this.data);
+      this.data = this.list.slice(0, this.perPage);
+      this.$emit("dataSlice", this.data);
     },
     onPageClick(event) {
       this.currentPage = event;
-      this.data = this.list.slice(this.perPage*(event-1), this.perPage*event);
-      this.$emit('dataSlice', this.data);
+      this.data = this.list.slice(
+        this.perPage * (event - 1),
+        this.perPage * event
+      );
+      this.$emit("dataSlice", this.data);
     },
     updateList() {
       this.total = this.list.length;
-      this.data = this.list.slice(this.perPage*(this.currentPage-1), this.perPage*this.currentPage);
-      this.$emit('dataSlice', this.data);
+      this.data = this.list.slice(
+        this.perPage * (this.currentPage - 1),
+        this.perPage * this.currentPage
+      );
+      this.$emit("dataSlice", this.data);
     },
-  }
+  },
 };
 </script>

@@ -46,20 +46,20 @@
         <router-link :to="{ name: 'orderInvoiceList' }" class="navbar-item"
           >Važtaraščiai</router-link
         >
-        
-        <a class="navbar-item" @click="this.store.logout()" href="#">&nbsp;Atsijungti&nbsp;</a>
 
+        <a class="navbar-item" @click="this.store.logout()" href="#"
+          >&nbsp;Atsijungti&nbsp;</a
+        >
       </div>
     </div>
-    
   </nav>
 </template>
 
 <script>
-import { session } from '@/lib/store';
+import { session } from "@/lib/store";
 
 export default {
-  name: 'TopMenu',
+  name: "TopMenu",
   data() {
     return {};
   },
@@ -73,11 +73,11 @@ export default {
 
     return {
       store,
-    }
+    };
   },
 
   methods: {
     load() {},
-  }
+  },
 };
 </script>

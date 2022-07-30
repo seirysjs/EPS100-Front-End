@@ -8,13 +8,13 @@
 </template>
 
 <script>
-import { session } from '@/lib/store';
+import { session } from "@/lib/store";
 import { http } from "@/lib/api";
 
-import TopMenu from '@/partials/TopMenu.vue';
+import TopMenu from "@/partials/TopMenu.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   data() {
     return {};
   },
@@ -32,7 +32,7 @@ export default {
 
     return {
       store,
-    }
+    };
   },
 
   methods: {
@@ -41,17 +41,18 @@ export default {
       const userRouter = this.$router;
 
       http.interceptors.response.use(
-      function (response) {
-        return response
-      },
-      function (error) {
-      if (error.response.status === 401) {
-        userStore.user = null;
-        userRouter.push({ name: "login" });
-      }
-      return Promise.reject(error)
-      });
-    }
-  }
+        function (response) {
+          return response;
+        },
+        function (error) {
+          if (error.response.status === 401) {
+            userStore.user = null;
+            userRouter.push({ name: "login" });
+          }
+          return Promise.reject(error);
+        }
+      );
+    },
+  },
 };
 </script>

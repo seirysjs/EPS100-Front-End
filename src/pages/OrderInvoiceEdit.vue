@@ -4,67 +4,77 @@
     <table class="table is-fullwidth">
       <tr>
         <td>
-          <div style="margin-top: 32px;">
-            <div class="field is-grouped is-grouped-right" style="margin-bottom: -32px;">
+          <div style="margin-top: 32px">
             <div
               class="field is-grouped is-grouped-right"
-              style="margin-bottom: -100%;"
+              style="margin-bottom: -32px"
             >
+              <div
+                class="field is-grouped is-grouped-right"
+                style="margin-bottom: -100%"
+              >
+                <div class="control">
+                  &nbsp;&nbsp;<input
+                    class="button is-link"
+                    type="submit"
+                    @click="postForm('completeOrder')"
+                    value="Išsaugoti"
+                  />
+                </div>
+
+                <div class="control">
+                  <a href="#" class="button is-light" @click="routerGoBack()"
+                    >Grįžti</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="field is-grouped">
               <div class="control">
-                &nbsp;&nbsp;<input
-                  class="button is-link"
-                  type="submit"
-                  @click="postForm('completeOrder')"
-                  value="Išsaugoti"
+                <label class="label" for="order_id">Važtaraščio Nr.:</label>
+                <input
+                  class="input"
+                  style="width: 180px"
+                  :class="errors.transfer_id && 'is-danger'"
+                  :placeholder="transfer_id"
+                  type="number"
+                  v-model="form.transfer_id"
+                  disabled
                 />
               </div>
 
-              <div class="control"><a href="#" class="button is-light" @click="routerGoBack()">Grįžti</a></div>
-            </div></div>
-            <div class="field is-grouped">
-            <div class="control">
-              <label class="label" for="order_id">Važtaraščio Nr.:</label>
-              <input
-                class="input"
-                style="width: 180px"
-                :class="errors.transfer_id && 'is-danger'"
-                :placeholder="transfer_id"
-                type="number"
-                v-model="form.transfer_id"
-                disabled
-              />
-            </div>
-
-            <div class="control" style="margin-left: 5px">
-              <label class="label" for="order_id">VAZ Nr.:</label>
-              <input
-                class="input"
-                style="width: 180px"
-                :class="errors.vaz_number && 'is-danger'"
-                type="text"
-                v-model="form.vaz_number"
-              />
-            </div>
-
-            <div class="control" style="margin-left: 5px">
-              <label class="label" for="client_id">Klientas</label>
-              <div class="select" :class="errors.client_id && 'is-danger'">
-                <select
-                  v-model="form.client_id"
-                  @change="onChangeClient()"
-                  disabled
-                >
-                  <option value="0" selected>Pasirinkti</option>
-                  <option
-                    v-for="(client, index) in clients"
-                    v-bind:key="index"
-                    :value="client.client_id"
-                  >
-                    {{ client.name }}
-                  </option>
-                </select>
+              <div class="control" style="margin-left: 5px">
+                <label class="label" for="order_id">VAZ Nr.:</label>
+                <input
+                  class="input"
+                  style="width: 180px"
+                  :class="errors.vaz_number && 'is-danger'"
+                  type="text"
+                  v-model="form.vaz_number"
+                />
               </div>
-            </div></div></div>
+
+              <div class="control" style="margin-left: 5px">
+                <label class="label" for="client_id">Klientas</label>
+                <div class="select" :class="errors.client_id && 'is-danger'">
+                  <select
+                    v-model="form.client_id"
+                    @change="onChangeClient()"
+                    disabled
+                  >
+                    <option value="0" selected>Pasirinkti</option>
+                    <option
+                      v-for="(client, index) in clients"
+                      v-bind:key="index"
+                      :value="client.client_id"
+                    >
+                      {{ client.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
         </td>
       </tr>
       <tr>
@@ -79,7 +89,6 @@
                   <input
                     class="input"
                     :class="errors.invoice_date && 'is-danger'"
-                    
                     type="datetime-local"
                     v-model="form.invoice_date"
                   />
@@ -94,10 +103,7 @@
                     class="control select"
                     :class="errors.transport_id && 'is-danger'"
                   >
-                    <select
-                      v-model="form.transport_id"
-                      
-                    >
+                    <select v-model="form.transport_id">
                       <option value="null" selected>Pasirinkti</option>
                       <option
                         v-for="(transport, index) in transports"
@@ -117,7 +123,7 @@
                     class="control select"
                     :class="errors.worker_id && 'is-danger'"
                   >
-                    <select v-model="form.worker_id" >
+                    <select v-model="form.worker_id">
                       <option value="null" selected>Pasirinkti</option>
                       <option
                         v-for="worker in workers"
@@ -146,7 +152,6 @@
                     <div class="control">
                       <input
                         class="input"
-                        
                         :class="errors.unloading_address && 'is-danger'"
                         style="width: 180px"
                         type="text"
@@ -160,7 +165,6 @@
                     <div class="control">
                       <input
                         class="input"
-                        
                         :class="errors.unloading_city && 'is-danger'"
                         style="width: 180px"
                         type="text"
@@ -174,7 +178,6 @@
                     <div class="control">
                       <input
                         class="input"
-                        
                         :class="errors.unloading_postal_code && 'is-danger'"
                         style="width: 180px"
                         type="text"
@@ -188,7 +191,6 @@
                     <div class="control">
                       <input
                         class="input"
-                        
                         :class="errors.unloading_country && 'is-danger'"
                         style="width: 180px"
                         type="text"
@@ -202,33 +204,45 @@
             </div>
             <div class="columns">
               <div class="column is-one-quarter">
-                <div class="control" style="margin-left: 5px; margin-top: -20px; margin-bottom:10px;">
+                <div
+                  class="control"
+                  style="
+                    margin-left: 5px;
+                    margin-top: -20px;
+                    margin-bottom: 10px;
+                  "
+                >
                   <label class="label" for="unloading_date"
                     >Iškrovimo data (VAZ):</label
                   >
                   <input
                     class="input"
                     :class="errors.unloading_date && 'is-danger'"
-                    
                     type="datetime-local"
                     v-model="form.unloading_date"
                   />
                 </div>
               </div>
               <div class="column">
-                    <div class="control" style="margin-left: 5px; margin-top: -20px; margin-bottom:10px;">
-                    <label class="label" for="city">Tel Nr. (VAZ):</label>
-                      <input
-                        class="input"
-                        
-                        :class="errors.unloading_phone_number && 'is-danger'"
-                        style="width: 180px"
-                        type="text"
-                        v-model="form.unloading_phone_number"
-                        :placeholder="client.phone"
-                      />
-                    </div>
-                  </div>
+                <div
+                  class="control"
+                  style="
+                    margin-left: 5px;
+                    margin-top: -20px;
+                    margin-bottom: 10px;
+                  "
+                >
+                  <label class="label" for="city">Tel Nr. (VAZ):</label>
+                  <input
+                    class="input"
+                    :class="errors.unloading_phone_number && 'is-danger'"
+                    style="width: 180px"
+                    type="text"
+                    v-model="form.unloading_phone_number"
+                    :placeholder="client.phone"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </td>
@@ -245,7 +259,6 @@
                     <div class="control">
                       <input
                         class="input"
-                        
                         :class="errors.loading_address && 'is-danger'"
                         style="width: 180px"
                         type="text"
@@ -259,7 +272,6 @@
                     <div class="control">
                       <input
                         class="input"
-                        
                         :class="errors.loading_city && 'is-danger'"
                         style="width: 180px"
                         type="text"
@@ -273,7 +285,6 @@
                     <div class="control">
                       <input
                         class="input"
-                        
                         :class="errors.loading_postal_code && 'is-danger'"
                         style="width: 180px"
                         type="text"
@@ -287,7 +298,6 @@
                     <div class="control">
                       <input
                         class="input"
-                        
                         :class="errors.loading_country && 'is-danger'"
                         style="width: 180px"
                         type="text"
@@ -301,14 +311,20 @@
             </div>
             <div class="columns">
               <div class="column is-one-quarter">
-                <div class="control" style="margin-left: 5px; margin-top: -20px; margin-bottom:10px;">
+                <div
+                  class="control"
+                  style="
+                    margin-left: 5px;
+                    margin-top: -20px;
+                    margin-bottom: 10px;
+                  "
+                >
                   <label class="label" for="drying_started_at"
                     >Pakrovimo data (VAZ):</label
                   >
                   <input
                     class="input"
                     :class="errors.loading_date && 'is-danger'"
-                    
                     type="datetime-local"
                     v-model="form.loading_date"
                   />
@@ -384,7 +400,6 @@
                 </td>
                 <td>
                   <input
-                    
                     v-model="productRow.quantity"
                     @change="onChangeQuantity(index)"
                     class="input"
@@ -400,7 +415,6 @@
                 </td>
                 <td>
                   <input
-                    
                     v-model="productRow.packs"
                     class="input"
                     type="text"
@@ -412,7 +426,6 @@
                 </td>
                 <td>
                   <input
-                    
                     v-model="productRow.quantityM3"
                     @change="onChangeQuantityM3(index)"
                     class="input"
@@ -439,30 +452,30 @@
                 </td>
                 <td></td>
               </tr>
-              
             </tbody>
           </table>
         </td>
       </tr>
       <tr>
-                <td>
-                  <div
-              class="field is-grouped is-grouped-right"
-            >
-              <div class="control">
-                <input
-                  class="button is-link"
-                  type="submit"
-                  @click="postForm('completeOrder')"
-                  value="Išsaugoti"
-                />
-              </div>
-
-              <div class="control"><a href="#" class="button is-light" @click="routerGoBack()">Grįžti</a></div>
+        <td>
+          <div class="field is-grouped is-grouped-right">
+            <div class="control">
+              <input
+                class="button is-link"
+                type="submit"
+                @click="postForm('completeOrder')"
+                value="Išsaugoti"
+              />
             </div>
-                  
-                </td>
-              </tr>
+
+            <div class="control">
+              <a href="#" class="button is-light" @click="routerGoBack()"
+                >Grįžti</a
+              >
+            </div>
+          </div>
+        </td>
+      </tr>
     </table>
   </div>
 </template>
@@ -576,8 +589,11 @@ export default {
           this.productRows.push(productRow);
           this.getTotalVolume();
 
-          if ((this.productRows.length != Object.keys(this.fulfilledProducts).length))
-          return;
+          if (
+            this.productRows.length !=
+            Object.keys(this.fulfilledProducts).length
+          )
+            return;
 
           this.done = true;
           this.addFreeProductRows();
@@ -588,28 +604,28 @@ export default {
     addFreeProductRows() {
       if (!this.done) return;
 
-          for (const [blueprint_id, content] of Object.entries(
-            this.fulfilledProductsFree
-          )) {
-            const orderItemFulfills = content.orderItemFulfills;
-            if (!this.productRows.find(row => row.blueprint_id == blueprint_id))
-            fetchBlueprint(blueprint_id).then((res) => {
-              const blueprint = res.data;
-              const count = 0;
-              const maxCount = this.fulfilledProductsFree[blueprint_id].count;
-              const orderItem = {
-                product_class_id: blueprint.product_class_id,
-                blueprint_id: blueprint_id,
-                blueprint: blueprint,
-                count: count,
-                max: maxCount,
-                orderItemFulfills: orderItemFulfills,
-              };
+      for (const [blueprint_id, content] of Object.entries(
+        this.fulfilledProductsFree
+      )) {
+        const orderItemFulfills = content.orderItemFulfills;
+        if (!this.productRows.find((row) => row.blueprint_id == blueprint_id))
+          fetchBlueprint(blueprint_id).then((res) => {
+            const blueprint = res.data;
+            const count = 0;
+            const maxCount = this.fulfilledProductsFree[blueprint_id].count;
+            const orderItem = {
+              product_class_id: blueprint.product_class_id,
+              blueprint_id: blueprint_id,
+              blueprint: blueprint,
+              count: count,
+              max: maxCount,
+              orderItemFulfills: orderItemFulfills,
+            };
 
-              this.addProductRow(orderItem);
-            });
-          }
-        this.done = false;
+            this.addProductRow(orderItem);
+          });
+      }
+      this.done = false;
     },
 
     load() {
@@ -626,67 +642,77 @@ export default {
         this.clients = res.data;
       });
 
-
-        fetchTransfer(this.id).then((res) => {
-          this.transfer = res.data;
+      fetchTransfer(this.id).then((res) => {
+        this.transfer = res.data;
 
         fetchOrder(this.transfer.order_id).then((res) => {
-        this.form = res.data;
+          this.form = res.data;
 
-        this.form.order_id = this.transfer.order_id;
-        this.form.vaz_number = this.transfer.vaz_number;
-        this.form.transfer_id = this.transfer.transfer_id;
-        this.form.invoice_date = dateToLocaleString(this.transfer.invoice_date);
-        this.form.unloading_address = this.transfer.unloading_address;
-        this.form.unloading_city = this.transfer.unloading_city;
-        this.form.unloading_country = this.transfer.unloading_country;
-        this.form.unloading_postal_code = this.transfer.unloading_postal_code;
-        this.form.unloading_phone_number = this.transfer.unloading_phone_number;
-        this.form.unloading_date = dateToLocaleString(this.transfer.unloading_date);
-        this.form.loading_address = this.transfer.loading_address;
-        this.form.loading_city = this.transfer.loading_city;
-        this.form.loading_country = this.transfer.loading_country;
-        this.form.loading_postal_code = this.transfer.loading_postal_code;
-        this.form.loading_date = dateToLocaleString(this.transfer.loading_date);
-        this.form.worker_id = this.transfer.worker_id;
-        this.form.transport_id = this.transfer.transport_id;
+          this.form.order_id = this.transfer.order_id;
+          this.form.vaz_number = this.transfer.vaz_number;
+          this.form.transfer_id = this.transfer.transfer_id;
+          this.form.invoice_date = dateToLocaleString(
+            this.transfer.invoice_date
+          );
+          this.form.unloading_address = this.transfer.unloading_address;
+          this.form.unloading_city = this.transfer.unloading_city;
+          this.form.unloading_country = this.transfer.unloading_country;
+          this.form.unloading_postal_code = this.transfer.unloading_postal_code;
+          this.form.unloading_phone_number =
+            this.transfer.unloading_phone_number;
+          this.form.unloading_date = dateToLocaleString(
+            this.transfer.unloading_date
+          );
+          this.form.loading_address = this.transfer.loading_address;
+          this.form.loading_city = this.transfer.loading_city;
+          this.form.loading_country = this.transfer.loading_country;
+          this.form.loading_postal_code = this.transfer.loading_postal_code;
+          this.form.loading_date = dateToLocaleString(
+            this.transfer.loading_date
+          );
+          this.form.worker_id = this.transfer.worker_id;
+          this.form.transport_id = this.transfer.transport_id;
 
-        this.onChangeClient();
+          this.onChangeClient();
 
-        fetchOrderItemFulfillsByOrder(this.transfer.order_id).then((res) => {
-          this.fulfilledProductsFree = res.data;
-          this.fulfilledProducts = mapOrderItemFulfillsByBlueprints(this.transfer.transfer_items).orderItemsMap;
+          fetchOrderItemFulfillsByOrder(this.transfer.order_id).then((res) => {
+            this.fulfilledProductsFree = res.data;
+            this.fulfilledProducts = mapOrderItemFulfillsByBlueprints(
+              this.transfer.transfer_items
+            ).orderItemsMap;
 
-          if (Object.keys(this.fulfilledProducts).length == 0) {
-            this.done = true;
-            this.addFreeProductRows();
-          }
-          
-          for (const [blueprint_id, content] of Object.entries(
-            this.fulfilledProducts
-          )) {
-            const orderItemFulfills = content.orderItemFulfills;
-            fetchBlueprint(blueprint_id).then((res) => {
-              const blueprint = res.data;
-              const packs = this.fulfilledProducts[blueprint_id].packs;
-              const count = this.fulfilledProducts[blueprint_id].count;
-              const maxCount = (this.fulfilledProducts[blueprint_id].count + (this.fulfilledProductsFree[blueprint_id] ? this.fulfilledProductsFree[blueprint_id].count : 0));
-              const orderItem = {
-                product_class_id: blueprint.product_class_id,
-                blueprint_id: blueprint_id,
-                blueprint: blueprint,
-                count: count,
-                packs: packs,
-                max: maxCount,
-                orderItemFulfills: orderItemFulfills,
-              };
-              this.addProductRow(orderItem);
-            });
-          }
+            if (Object.keys(this.fulfilledProducts).length == 0) {
+              this.done = true;
+              this.addFreeProductRows();
+            }
+
+            for (const [blueprint_id, content] of Object.entries(
+              this.fulfilledProducts
+            )) {
+              const orderItemFulfills = content.orderItemFulfills;
+              fetchBlueprint(blueprint_id).then((res) => {
+                const blueprint = res.data;
+                const packs = this.fulfilledProducts[blueprint_id].packs;
+                const count = this.fulfilledProducts[blueprint_id].count;
+                const maxCount =
+                  this.fulfilledProducts[blueprint_id].count +
+                  (this.fulfilledProductsFree[blueprint_id]
+                    ? this.fulfilledProductsFree[blueprint_id].count
+                    : 0);
+                const orderItem = {
+                  product_class_id: blueprint.product_class_id,
+                  blueprint_id: blueprint_id,
+                  blueprint: blueprint,
+                  count: count,
+                  packs: packs,
+                  max: maxCount,
+                  orderItemFulfills: orderItemFulfills,
+                };
+                this.addProductRow(orderItem);
+              });
+            }
+          });
         });
-
-        });
-        
       });
     },
 
@@ -696,14 +722,24 @@ export default {
 
     checkProductRowCountMax() {
       const errors = [];
-      for (let productRowIndex = 0; productRowIndex < this.productRows.length; productRowIndex++) {
-        if ((this.productRows[productRowIndex].quantity > this.productRows[productRowIndex].max) || (this.productRows[productRowIndex].quantity < 0))
-        errors.push({
-          property: 'product_' + this.productRows[productRowIndex].blueprint_id,
-          constraints: 'product_' + this.productRows[productRowIndex].blueprint_id,
-        });
+      for (
+        let productRowIndex = 0;
+        productRowIndex < this.productRows.length;
+        productRowIndex++
+      ) {
+        if (
+          this.productRows[productRowIndex].quantity >
+            this.productRows[productRowIndex].max ||
+          this.productRows[productRowIndex].quantity < 0
+        )
+          errors.push({
+            property:
+              "product_" + this.productRows[productRowIndex].blueprint_id,
+            constraints:
+              "product_" + this.productRows[productRowIndex].blueprint_id,
+          });
       }
-      return errors
+      return errors;
     },
 
     onChangeClient() {
@@ -818,16 +854,20 @@ export default {
       this.form.order_id = this.transfer.order_id;
       this.form.completeOrder = true;
       this.form.productRows = this.productRows;
-      if (this.checkProductRowCountMax().length > 0) this.parseErrors(this.checkProductRowCountMax());
+      if (this.checkProductRowCountMax().length > 0)
+        this.parseErrors(this.checkProductRowCountMax());
       if (this.checkProductRowCountMax().length == 0)
-      updateTransfer(this.id, this.form)
-        .then((res) => {
-          const content = res.data;
-          this.parseErrors(content.errors);
-          if (content.errors.length != 0) return;
-          this.$router.push({ name: "orderDetails", params: { id: this.form.order_id } });
-        })
-        .catch((err) => console.log("ERROR ", err));
+        updateTransfer(this.id, this.form)
+          .then((res) => {
+            const content = res.data;
+            this.parseErrors(content.errors);
+            if (content.errors.length != 0) return;
+            this.$router.push({
+              name: "orderDetails",
+              params: { id: this.form.order_id },
+            });
+          })
+          .catch((err) => console.log("ERROR ", err));
     },
 
     routerGoBack() {
@@ -836,4 +876,3 @@ export default {
   },
 };
 </script>
-

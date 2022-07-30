@@ -4,33 +4,63 @@
     <table class="table">
       <div class="field">
         <div class="control">
-          <label class="label" for='product_class'>Matmuo X (mm):</label>
-          <input class="input" :class="errors.x_mm && 'is-danger'" type="number" step="1" min="0" v-model="form.x_mm">
+          <label class="label" for="product_class">Matmuo X (mm):</label>
+          <input
+            class="input"
+            :class="errors.x_mm && 'is-danger'"
+            type="number"
+            step="1"
+            min="0"
+            v-model="form.x_mm"
+          />
         </div>
         <div class="control">
-          <label class="label" for='product_class'>Matmuo Y (mm):</label>
-          <input class="input" :class="errors.y_mm && 'is-danger'" type="number" step="1" min="0" v-model="form.y_mm">
+          <label class="label" for="product_class">Matmuo Y (mm):</label>
+          <input
+            class="input"
+            :class="errors.y_mm && 'is-danger'"
+            type="number"
+            step="1"
+            min="0"
+            v-model="form.y_mm"
+          />
         </div>
         <div class="control">
-          <label class="label" for='product_class'>Matmuo Z (mm):</label>
-          <input class="input" :class="errors.z_mm && 'is-danger'" type="number" step="1" min="0" v-model="form.z_mm">
+          <label class="label" for="product_class">Matmuo Z (mm):</label>
+          <input
+            class="input"
+            :class="errors.z_mm && 'is-danger'"
+            type="number"
+            step="1"
+            min="0"
+            v-model="form.z_mm"
+          />
         </div>
       </div>
-  <div class="field is-grouped is-grouped-right">
-      <div class="control"><a href="#" class="button is-light" @click="routerGoBack()">Atšaukti</a></div>
-    <div class="control">
-      <input class="button is-link" @click="postForm()" type='submit' value='Pridėti'/>
-    </div>
-  </div>
-</table>
+      <div class="field is-grouped is-grouped-right">
+        <div class="control">
+          <a href="#" class="button is-light" @click="routerGoBack()"
+            >Atšaukti</a
+          >
+        </div>
+        <div class="control">
+          <input
+            class="button is-link"
+            @click="postForm()"
+            type="submit"
+            value="Pridėti"
+          />
+        </div>
+      </div>
+    </table>
   </div>
 </template>
 
 <script>
-import { createProductSize } from '@/lib/api';
+import { createProductSize } from "@/lib/api";
 
 export default {
-  name: 'ProductNewSize',
+  name: "ProductNewSize",
   data() {
     return {
       form: {
@@ -38,11 +68,11 @@ export default {
         y_mm: 0,
         z_mm: 0,
       },
-      errors: {}
+      errors: {},
     };
   },
 
-    created() {
+  created() {
     this.load();
   },
 
@@ -52,18 +82,18 @@ export default {
       if (!errors.length) return;
       const labels = {};
       if (errors.length != 0)
-      errors.forEach(error => labels[error.property] = error.constraints);
+        errors.forEach((error) => (labels[error.property] = error.constraints));
       this.errors = labels;
     },
     postForm() {
       createProductSize(this.form)
-        .then(res => {
+        .then((res) => {
           const content = res;
           this.parseErrors(content.data.errors);
           if (content.data.errors.length == 0)
-          this.$router.push({ name: "productSizesList" });
+            this.$router.push({ name: "productSizesList" });
         })
-        .catch(err => console.log("ERROR ", err));
+        .catch((err) => console.log("ERROR ", err));
     },
 
     routerGoBack() {
@@ -72,4 +102,3 @@ export default {
   },
 };
 </script>
-

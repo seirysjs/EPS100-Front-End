@@ -6,12 +6,12 @@
 
     <div class="block">
       <div class="control">
-                <router-link
-                  :to="{ name: 'inventoryClassList' }"
-                  class="button is-light"
-                  >Grįžti</router-link
-                >
-              </div>
+        <router-link
+          :to="{ name: 'inventoryClassList' }"
+          class="button is-light"
+          >Grįžti</router-link
+        >
+      </div>
 
       <table class="table is-fullwidth">
         <tr>
@@ -36,7 +36,10 @@
               {{ warehouseItem.blueprint.product_size.z_mm }}
             </div>
           </td>
-          <td>x<div class="tag">{{ warehouseItem.count }}</div></td>
+          <td>
+            x
+            <div class="tag">{{ warehouseItem.count }}</div>
+          </td>
           <td>
             <span class="tag is-light is-success">{{
               countInvWarehouseItemVolume(warehouseItem)
@@ -78,21 +81,21 @@
         </tr>
       </table>
     </div>
-    <br>
+    <br />
   </div>
 </template>
 
 <script>
-import { fetchClassInventory, fetchProductClass } from '@/lib/api';
+import { fetchClassInventory, fetchProductClass } from "@/lib/api";
 import {
   countInvWarehouseItemVolume,
   countInvOrderItemVolume,
   countInvTotalItemVolume,
   sortInvBlueprintsByActualSizes,
-} from '@/lib/ui';
+} from "@/lib/ui";
 
 export default {
-  name: 'InventoryClassBlueprintsList',
+  name: "InventoryClassBlueprintsList",
   props: {
     id: String,
   },
@@ -116,7 +119,7 @@ export default {
         this.productClass = res.data;
       });
     },
-    
+
     countInvWarehouseItemVolume(warehouseItem) {
       return countInvWarehouseItemVolume(warehouseItem);
     },
@@ -128,8 +131,6 @@ export default {
     countInvTotalItemVolume(warehouseItem) {
       return countInvTotalItemVolume(warehouseItem);
     },
-
   },
 };
 </script>
-

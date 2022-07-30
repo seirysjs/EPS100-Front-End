@@ -4,56 +4,66 @@
     <table class="table is-fullwidth">
       <tr>
         <td>
-          <div style="margin-top: 32px;">
-            <div class="field is-grouped is-grouped-right" style="margin-bottom: -32px;">
+          <div style="margin-top: 32px">
             <div
               class="field is-grouped is-grouped-right"
-              style="margin-bottom: -100%;"
+              style="margin-bottom: -32px"
             >
+              <div
+                class="field is-grouped is-grouped-right"
+                style="margin-bottom: -100%"
+              >
+                <div class="control">
+                  &nbsp;&nbsp;<input
+                    class="button is-link"
+                    type="submit"
+                    @click="postForm('completeOrder')"
+                    value="Išsaugoti"
+                  />
+                </div>
+
+                <div class="control" style="margin-left: 2px">
+                  <a href="#" class="button is-light" @click="routerGoBack()"
+                    >Grįžti</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="field is-grouped">
               <div class="control">
-                &nbsp;&nbsp;<input
-                  class="button is-link"
-                  type="submit"
-                  @click="postForm('completeOrder')"
-                  value="Išsaugoti"
+                <label class="label" for="bill_id">Sąskaitos Nr.:</label>
+                <input
+                  class="input"
+                  style="width: 180px"
+                  :class="errors.bill_id && 'is-danger'"
+                  :placeholder="bill_id"
+                  type="number"
+                  v-model="form.bill_id"
+                  disabled
                 />
               </div>
 
-                <div class="control" style="margin-left: 2px"><a href="#" class="button is-light" @click="routerGoBack()">Grįžti</a></div>
-            </div></div>
-            <div class="field is-grouped">
-            <div class="control">
-              <label class="label" for="bill_id">Sąskaitos Nr.:</label>
-              <input
-                class="input"
-                style="width: 180px"
-                :class="errors.bill_id && 'is-danger'"
-                :placeholder="bill_id"
-                type="number"
-                v-model="form.bill_id"
-                disabled
-              />
-            </div>
-
-            <div class="control" style="margin-left: 5px">
-              <label class="label" for="client_id">Klientas</label>
-              <div class="select" :class="errors.client_id && 'is-danger'">
-                <select
-                  v-model="form.client_id"
-                  @change="onChangeClient()"
-                  disabled
-                >
-                  <option value="0" selected>Pasirinkti</option>
-                  <option
-                    v-for="(client, index) in clients"
-                    v-bind:key="index"
-                    :value="client.client_id"
+              <div class="control" style="margin-left: 5px">
+                <label class="label" for="client_id">Klientas</label>
+                <div class="select" :class="errors.client_id && 'is-danger'">
+                  <select
+                    v-model="form.client_id"
+                    @change="onChangeClient()"
+                    disabled
                   >
-                    {{ client.name }}
-                  </option>
-                </select>
+                    <option value="0" selected>Pasirinkti</option>
+                    <option
+                      v-for="(client, index) in clients"
+                      v-bind:key="index"
+                      :value="client.client_id"
+                    >
+                      {{ client.name }}
+                    </option>
+                  </select>
+                </div>
               </div>
-            </div></div></div>
+            </div>
+          </div>
         </td>
       </tr>
       <tr>
@@ -68,7 +78,6 @@
                   <input
                     class="input"
                     :class="errors.bill_date && 'is-danger'"
-                    
                     type="datetime-local"
                     v-model="form.bill_date"
                   />
@@ -82,7 +91,6 @@
                   <input
                     class="input"
                     :class="errors.days_postponed && 'is-danger'"
-                    
                     type="number"
                     step="1"
                     min="0"
@@ -92,39 +100,36 @@
               </div>
               <div class="column is-one-quarter">
                 <div class="control">
-                  <label class="label" for="loading_date"
-                    >Pastaba:</label
-                  >
+                  <label class="label" for="loading_date">Pastaba:</label>
                   <input
                     class="input"
                     :class="errors.note && 'is-danger'"
-                    
                     type="text"
                     v-model="form.note"
                   />
                 </div>
               </div>
               <div class="column is-one-quarter">
-              <div class="control">
-      <label class="label" for='client_id'>Kainoraštis</label>
-    <div class="control select" :class="errors.price_list_id && 'is-danger'">
-      <select
-              v-model="form.price_list_id"
-            >
-              <option value="null" selected>Pasirinkti</option>
-              <option
-                v-for="(priceList, index) in priceLists"
-                v-bind:key="index"
-                :value="priceList.price_list_id"
-              >
-                ({{ priceList.price_list_id }}) {{ priceList.name }} 
-              </option>
-            </select>
-    </div>
-    </div>
-    </div>
+                <div class="control">
+                  <label class="label" for="client_id">Kainoraštis</label>
+                  <div
+                    class="control select"
+                    :class="errors.price_list_id && 'is-danger'"
+                  >
+                    <select v-model="form.price_list_id">
+                      <option value="null" selected>Pasirinkti</option>
+                      <option
+                        v-for="(priceList, index) in priceLists"
+                        v-bind:key="index"
+                        :value="priceList.price_list_id"
+                      >
+                        ({{ priceList.price_list_id }}) {{ priceList.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
             </div>
-            
           </div>
         </td>
       </tr>
@@ -193,7 +198,6 @@
                 </td>
                 <td>
                   <input
-                    
                     v-model="productRow.quantity"
                     @change="onChangeQuantity(index)"
                     class="input"
@@ -209,7 +213,6 @@
                 </td>
                 <td>
                   <input
-                    
                     v-model="productRow.quantityM3"
                     @change="onChangeQuantityM3(index)"
                     class="input"
@@ -235,30 +238,30 @@
                   </div>
                 </td>
               </tr>
-              
             </tbody>
           </table>
         </td>
       </tr>
       <tr>
-                <td>
-                  <div
-              class="field is-grouped is-grouped-right"
-            >
-              <div class="control">
-                <input
-                  class="button is-link"
-                  type="submit"
-                  @click="postForm('completeOrder')"
-                  value="Išsaugoti"
-                />
-              </div>
-
-            <div class="control"><a href="#" class="button is-light" @click="routerGoBack()">Grįžti</a></div>
+        <td>
+          <div class="field is-grouped is-grouped-right">
+            <div class="control">
+              <input
+                class="button is-link"
+                type="submit"
+                @click="postForm('completeOrder')"
+                value="Išsaugoti"
+              />
             </div>
-                  
-                </td>
-              </tr>
+
+            <div class="control">
+              <a href="#" class="button is-light" @click="routerGoBack()"
+                >Grįžti</a
+              >
+            </div>
+          </div>
+        </td>
+      </tr>
     </table>
   </div>
 </template>
@@ -374,8 +377,11 @@ export default {
           this.productRows.push(productRow);
           this.getTotalVolume();
 
-          if ((this.productRows.length != Object.keys(this.fulfilledProducts).length))
-          return;
+          if (
+            this.productRows.length !=
+            Object.keys(this.fulfilledProducts).length
+          )
+            return;
 
           this.done = true;
           this.addFreeProductRows();
@@ -386,32 +392,32 @@ export default {
     addFreeProductRows() {
       if (!this.done) return;
 
-          for (const [blueprint_id, content] of Object.entries(
-            this.fulfilledProductsFree
-          )) {
-            const orderItemFulfills = content.orderItemFulfills;
-            if (!this.productRows.find(row => row.blueprint_id == blueprint_id))
-            fetchBlueprint(blueprint_id).then((res) => {
-              const blueprint = res.data;
-              const count = 0;
-              const maxCount = this.fulfilledProductsFree[blueprint_id].count;
-              const orderItem = {
-                product_class_id: blueprint.product_class_id,
-                blueprint_id: blueprint_id,
-                blueprint: blueprint,
-                count: count,
-                max: maxCount,
-                orderItemFulfills: orderItemFulfills,
-              };
+      for (const [blueprint_id, content] of Object.entries(
+        this.fulfilledProductsFree
+      )) {
+        const orderItemFulfills = content.orderItemFulfills;
+        if (!this.productRows.find((row) => row.blueprint_id == blueprint_id))
+          fetchBlueprint(blueprint_id).then((res) => {
+            const blueprint = res.data;
+            const count = 0;
+            const maxCount = this.fulfilledProductsFree[blueprint_id].count;
+            const orderItem = {
+              product_class_id: blueprint.product_class_id,
+              blueprint_id: blueprint_id,
+              blueprint: blueprint,
+              count: count,
+              max: maxCount,
+              orderItemFulfills: orderItemFulfills,
+            };
 
-              this.addProductRow(orderItem);
-            });
-          }
-        this.done = false;
+            this.addProductRow(orderItem);
+          });
+      }
+      this.done = false;
     },
 
     load() {
-      fetchPriceListsEnabled().then(res => this.priceLists = res.data);
+      fetchPriceListsEnabled().then((res) => (this.priceLists = res.data));
       fetchTransports().then((res) => {
         this.transports = res.data;
       });
@@ -425,56 +431,59 @@ export default {
         this.clients = res.data;
       });
 
-
-        fetchBill(this.id).then((res) => {
-          this.bill = res.data;
+      fetchBill(this.id).then((res) => {
+        this.bill = res.data;
 
         fetchOrder(this.bill.order_id).then((res) => {
-        this.form = res.data;
-        this.form.price_list_id = this.bill.price_list_id;
+          this.form = res.data;
+          this.form.price_list_id = this.bill.price_list_id;
 
-        this.form.order_id = this.bill.order_id;
-        this.form.bill_id = this.bill.bill_id;
-        this.form.bill_date = dateToLocaleString(this.bill.bill_date);
-        this.form.note = this.bill.note;
-        this.form.days_postponed = this.bill.days_postponed;
+          this.form.order_id = this.bill.order_id;
+          this.form.bill_id = this.bill.bill_id;
+          this.form.bill_date = dateToLocaleString(this.bill.bill_date);
+          this.form.note = this.bill.note;
+          this.form.days_postponed = this.bill.days_postponed;
 
-        this.onChangeClient();
+          this.onChangeClient();
 
-        fetchOrderItemsForBillByOrder(this.bill.order_id).then((res) => {
-          this.fulfilledProductsFree = res.data;
-          this.fulfilledProducts = mapOrderItemFulfillsByBlueprints(this.bill.bill_items).orderItemsMap;
+          fetchOrderItemsForBillByOrder(this.bill.order_id).then((res) => {
+            this.fulfilledProductsFree = res.data;
+            this.fulfilledProducts = mapOrderItemFulfillsByBlueprints(
+              this.bill.bill_items
+            ).orderItemsMap;
 
-          if (Object.keys(this.fulfilledProducts).length == 0) {
-            this.done = true;
-            this.addFreeProductRows();
-          }
-          
-          for (const [blueprint_id, content] of Object.entries(
-            this.fulfilledProducts
-          )) {
-            const orderItemFulfills = content.orderItemFulfills;
-            fetchBlueprint(blueprint_id).then((res) => {
-              const blueprint = res.data;
-              const packs = this.fulfilledProducts[blueprint_id].packs;
-              const count = this.fulfilledProducts[blueprint_id].count;
-              const maxCount = (this.fulfilledProducts[blueprint_id].count + (this.fulfilledProductsFree[blueprint_id] ? this.fulfilledProductsFree[blueprint_id].count : 0));
-              const orderItem = {
-                product_class_id: blueprint.product_class_id,
-                blueprint_id: blueprint_id,
-                blueprint: blueprint,
-                count: count,
-                packs: packs,
-                max: maxCount,
-                orderItemFulfills: orderItemFulfills,
-              };
-              this.addProductRow(orderItem);
-            });
-          }
+            if (Object.keys(this.fulfilledProducts).length == 0) {
+              this.done = true;
+              this.addFreeProductRows();
+            }
+
+            for (const [blueprint_id, content] of Object.entries(
+              this.fulfilledProducts
+            )) {
+              const orderItemFulfills = content.orderItemFulfills;
+              fetchBlueprint(blueprint_id).then((res) => {
+                const blueprint = res.data;
+                const packs = this.fulfilledProducts[blueprint_id].packs;
+                const count = this.fulfilledProducts[blueprint_id].count;
+                const maxCount =
+                  this.fulfilledProducts[blueprint_id].count +
+                  (this.fulfilledProductsFree[blueprint_id]
+                    ? this.fulfilledProductsFree[blueprint_id].count
+                    : 0);
+                const orderItem = {
+                  product_class_id: blueprint.product_class_id,
+                  blueprint_id: blueprint_id,
+                  blueprint: blueprint,
+                  count: count,
+                  packs: packs,
+                  max: maxCount,
+                  orderItemFulfills: orderItemFulfills,
+                };
+                this.addProductRow(orderItem);
+              });
+            }
+          });
         });
-
-        });
-        
       });
     },
 
@@ -484,14 +493,24 @@ export default {
 
     checkProductRowCountMax() {
       const errors = [];
-      for (let productRowIndex = 0; productRowIndex < this.productRows.length; productRowIndex++) {
-        if ((this.productRows[productRowIndex].quantity > this.productRows[productRowIndex].max) || (this.productRows[productRowIndex].quantity < 0))
-        errors.push({
-          property: 'product_' + this.productRows[productRowIndex].blueprint_id,
-          constraints: 'product_' + this.productRows[productRowIndex].blueprint_id,
-        });
+      for (
+        let productRowIndex = 0;
+        productRowIndex < this.productRows.length;
+        productRowIndex++
+      ) {
+        if (
+          this.productRows[productRowIndex].quantity >
+            this.productRows[productRowIndex].max ||
+          this.productRows[productRowIndex].quantity < 0
+        )
+          errors.push({
+            property:
+              "product_" + this.productRows[productRowIndex].blueprint_id,
+            constraints:
+              "product_" + this.productRows[productRowIndex].blueprint_id,
+          });
       }
-      return errors
+      return errors;
     },
 
     onChangeClient() {
@@ -606,16 +625,20 @@ export default {
       this.form.order_id = this.bill.order_id;
       this.form.completeOrder = true;
       this.form.productRows = this.productRows;
-      if (this.checkProductRowCountMax().length > 0) this.parseErrors(this.checkProductRowCountMax());
+      if (this.checkProductRowCountMax().length > 0)
+        this.parseErrors(this.checkProductRowCountMax());
       if (this.checkProductRowCountMax().length == 0)
-      updateBill(this.id, this.form)
-        .then((res) => {
-          const content = res.data;
-          this.parseErrors(content.errors);
-          if (content.errors.length != 0) return;
-          this.$router.push({ name: "orderBillDetails", params: { id: this.id } });
-        })
-        .catch((err) => console.log("ERROR ", err));
+        updateBill(this.id, this.form)
+          .then((res) => {
+            const content = res.data;
+            this.parseErrors(content.errors);
+            if (content.errors.length != 0) return;
+            this.$router.push({
+              name: "orderBillDetails",
+              params: { id: this.id },
+            });
+          })
+          .catch((err) => console.log("ERROR ", err));
     },
 
     routerGoBack() {
@@ -624,4 +647,3 @@ export default {
   },
 };
 </script>
-

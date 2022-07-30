@@ -11,51 +11,72 @@
     </div>
 
     <div class="block">
-       <data-table :rowsPerPage="10" :list="clients" @dataSlice="data => this.data = data">
-  <template #head>
-        <tr>
-          <th>Klientas</th>
-          <th>Užsakymai <br> <span class="tag is-light">Eilėje</span></th>
-          <th>Užsakymai <br> <span class="tag is-light is-warning">Vykdomi</span></th>
-          <th>Užsakymai <br> <span class="tag is-light">Visi</span></th>
-          <th>Veiksmai</th>
-        </tr>
+      <data-table
+        :rowsPerPage="10"
+        :list="clients"
+        @dataSlice="(data) => (this.data = data)"
+      >
+        <template #head>
+          <tr>
+            <th>Klientas</th>
+            <th>
+              Užsakymai <br />
+              <span class="tag is-light">Eilėje</span>
+            </th>
+            <th>
+              Užsakymai <br />
+              <span class="tag is-light is-warning">Vykdomi</span>
+            </th>
+            <th>
+              Užsakymai <br />
+              <span class="tag is-light">Visi</span>
+            </th>
+            <th>Veiksmai</th>
+          </tr>
         </template>
 
-  <template #body>
-        <tr v-for="client in data" v-bind:key="client.client_id">
-          <td>{{ client.name }}</td>
-          <td><div class="tag">{{ ordersInQueueCount(client.orders) }}</div></td>
-          <td><div class="tag is-light is-warning">{{ ordersInWIPCount(client.orders) }}</div></td>
-          <td><div class="tag">{{ client.orders.length }}</div></td>
-          <td>
-            <div class="field is-grouped">
-              <div class="control">
-                <router-link
-                  :to="{
-                    name: 'clientDetails',
-                    params: { id: client.client_id },
-                  }"
-                  class="button is-light"
-                  >Praplesti</router-link
-                >
+        <template #body>
+          <tr v-for="client in data" v-bind:key="client.client_id">
+            <td>{{ client.name }}</td>
+            <td>
+              <div class="tag">{{ ordersInQueueCount(client.orders) }}</div>
+            </td>
+            <td>
+              <div class="tag is-light is-warning">
+                {{ ordersInWIPCount(client.orders) }}
               </div>
-            </div>
-          </td>
-        </tr>
+            </td>
+            <td>
+              <div class="tag">{{ client.orders.length }}</div>
+            </td>
+            <td>
+              <div class="field is-grouped">
+                <div class="control">
+                  <router-link
+                    :to="{
+                      name: 'clientDetails',
+                      params: { id: client.client_id },
+                    }"
+                    class="button is-light"
+                    >Praplesti</router-link
+                  >
+                </div>
+              </div>
+            </td>
+          </tr>
         </template>
-</data-table>
-  <br>
+      </data-table>
+      <br />
     </div>
   </div>
 </template>
 
 <script>
-import { fetchClients } from '@/lib/api';
-import { ordersInQueueCount, ordersInWIPCount } from '@/lib/ui';
+import { fetchClients } from "@/lib/api";
+import { ordersInQueueCount, ordersInWIPCount } from "@/lib/ui";
 
 export default {
-  name: 'ClientList',
+  name: "ClientList",
   data() {
     return {
       clients: [],
@@ -85,4 +106,3 @@ export default {
   },
 };
 </script>
-
